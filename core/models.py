@@ -8,13 +8,13 @@ from django.contrib.auth.models import User
 class Restaurant(models.Model):   
     '''Restaurant Class is Inhereting form django.db.models.Model'''
     class TypeChoices(models.TextChoices):
-        INDIAN="IN" "Indian"
-        CHINESE="CH" "Chinese"
-        ITALIAN="IT" "Italian"
-        GREEK="GR" "Greek"
-        MEXICAN="Mx" "Mexican"
-        FASTFOOD="FF" "Fastfood"
-        OTHERS="OT" "Others"
+        INDIAN="IN","Indian"
+        CHINESE="CH","Chinese"
+        ITALIAN="IT","Italian"
+        GREEK="GR","Greek"
+        MEXICAN="MX","Mexican"
+        FASTFOOD="FF","Fastfood"
+        OTHERS="OT","Others"
 
 
     name=models.CharField(max_length=100)
@@ -22,7 +22,7 @@ class Restaurant(models.Model):
     date_opened=models.DateField()
     latitude=models.FloatField()
     longtitude=models.FloatField()
-    Restaurant_type=models.CharField(max_length=2, choices=TypeChoices.choices)
+    restaurant_type=models.CharField(max_length=2, choices=TypeChoices.choices)
 
     def __str__(self):
         return self.name
