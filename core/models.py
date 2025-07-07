@@ -42,3 +42,9 @@ class Rating(models.Model):
     # Human-readable representation of a Rating object
 
 
+# 4) Sale Model
+class Sale(models.Model):
+    restaurant=models.ForeignKey(Restaurant,on_delete=models.SET_NULL,null=True)
+    income=models.DecimalField(max_digits=8,decimal_places=2)
+    datetime=models.DateTimeField()
+    
