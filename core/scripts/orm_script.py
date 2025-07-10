@@ -46,9 +46,7 @@ def run():
 
 
 
-
-'''
-# Querying the Database with ORM
+#3)  Querying the Database with ORM
 def run():
     
     # Fetching all restaurants
@@ -80,6 +78,8 @@ def run():
     Rating.objects.create(restaurant=restaurant, user=user, rating=4.5)
     # passing the restaurant and user objects directly to the create method
 
+
+# 4) Filtering and Excluding Records in Database using ORM
 def run():
     # Filtering the restaurants based on a condition.
     filtered_rating=Rating.objects.filter(rating=4)
@@ -97,4 +97,54 @@ def run():
     # Lookups
     excluded_rating = Rating.objects.exclude(rating__lte=4)  # Exclude ratings
     print(excluded_rating)
-    '''
+    
+
+# 5) Querying related objects in ORM
+def run():
+    rating=Rating.objects.first()  # Fetching the first rating
+    restaurant=rating.restaurant  # Accessing the related Foriegn Key restaurant object on whom the rating was given
+    print(restaurant)  # Print the restaurant object
+    print(restaurant.name)  # Print the name of the restaurant
+
+# 6) Querying related objects in ORM using reverse relation
+def run():
+    restaurant = Restaurant.objects.first()  # Fetching the first restaurant
+    
+    # M-1
+    # ratings = restaurant.rating_set.all()  # Accessing all ratings related to the restaurant
+    # print(ratings)  # Print all ratings for the restaurant
+
+    # M-2
+    ratings=restaurant.ratings.all()  # Accessing all ratings related to the restaurant using the related name
+    print(ratings)  # Print all ratings for the restaurant
+ 
+
+def run():
+    Sale.objects.create(
+        restaurant=Restaurant.objects.first(),  # Fetching the first restaurant
+        income=1000.00,
+        datetime=timezone.now()
+    )
+    Sale.objects.create(
+        restaurant=Restaurant.objects.first(),  # Fetching the first restaurant
+        income=2000.00,
+        datetime=timezone.now()
+    )
+    Sale.objects.create(
+        restaurant=Restaurant.objects.first(),  # Fetching the first restaurant
+        income=3000.00,
+        datetime=timezone.now()
+    )
+    
+
+
+
+def run():
+    restaurant = Restaurant.objects.first()  # Fetching the first restaurant
+    sales = restaurant.sales.all()  # Accessing all sales related to the restaurant using the related name
+    print(sales)  # Print all sales for the restaurant
+
+    # Accessing the first sale of the restaurant
+    first_sale = sales.first()
+    print(first_sale)  # Print the first sale object
+
