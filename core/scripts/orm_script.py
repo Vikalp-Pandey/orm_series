@@ -1,7 +1,7 @@
 from django.db import connection
 from django.utils import timezone
 from core.models import Restaurant, Rating, Sale
-
+from django.contrib.auth.models import User
 
 def run():
     print("Hello world from orm_script.py!")
@@ -39,21 +39,21 @@ def run():
 # Querying the Database with ORM
 def run():
     
-    # # Fetching all restaurants
-    # restaurants = Restaurant.objects.all()
-    # print(restaurants)
+    # Fetching all restaurants
+    restaurants = Restaurant.objects.all()
+    print(restaurants)
 
-    # # Fetching the first restaurant
-    # first_restaurant = Restaurant.objects.first()
+    # Fetching the first restaurant
+    first_restaurant = Restaurant.objects.first()
 
-    # # Indexing into django querysets
-    # first_restaurant=Restaurant.objects.all()[0]
-    # print(first_restaurant)
+    # Indexing into django querysets
+    first_restaurant=Restaurant.objects.all()[0]
+    print(first_restaurant)
 
-    # # Fetching the last restaurant
-    # last_restaurant=Restaurant.objects.last()
-    # print(last_restaurant)
-    # print(connection.queries)  # Print the SQL queries executed for the above operation
+    # Fetching the last restaurant
+    last_restaurant=Restaurant.objects.last()
+    print(last_restaurant)
+    print(connection.queries)  # Print the SQL queries executed for the above operation
 
     # Counting number of restaurants 
     restaurant_count = Restaurant.objects.count()
@@ -61,5 +61,20 @@ def run():
     print(connection.queries)  # Print the SQL queries executed for the above operation
     
     
-
+def run():
+    restaurant=Restaurant.objects.first() # Fetching the first restaurant
+    user=User.objects.first()            # Fetching the first user instance
     
+    Rating.objects.create(restaurant=restaurant, user=user, rating=4.5)
+    # passing the restaurant and user objects directly to the create method
+
+def run():
+    # Filtering the restaurants based on a condition.
+    filtered_rating=Rating.objects.filter(rating=4)
+    print(filtered_rating)
+    print(connection.queries)  # Print the SQL queries executed for the above operation
+
+    # Filtering based on a lookup
+    filtered_rating = Rating.objects.filter(rating__gte=3)  # Greater than or equal to 4.5
+    filtered_rating = Rating.objects.filter(rating__lte=3)  # Lesser than or equal to 4.5
+    print(filtered_rating)
