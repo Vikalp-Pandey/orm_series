@@ -39,18 +39,26 @@ def run():
 # Querying the Database with ORM
 def run():
     
-    # Fetching all restaurants
-    restaurants = Restaurant.objects.all()
-    print(restaurants)
+    # # Fetching all restaurants
+    # restaurants = Restaurant.objects.all()
+    # print(restaurants)
 
-    # Fetching the first restaurant
-    first_restaurant = Restaurant.objects.first()
+    # # Fetching the first restaurant
+    # first_restaurant = Restaurant.objects.first()
 
-    # Indexing into django querysets
-    first_restaurant=Restaurant.objects.all()[0]
-    
+    # # Indexing into django querysets
+    # first_restaurant=Restaurant.objects.all()[0]
+    # print(first_restaurant)
 
-    print(first_restaurant)
+    # # Fetching the last restaurant
+    # last_restaurant=Restaurant.objects.last()
+    # print(last_restaurant)
+    # print(connection.queries)  # Print the SQL queries executed for the above operation
+
+    # Counting number of restaurants 
+    restaurant_count = Restaurant.objects.count()
+    print(restaurant_count)
+    print(connection.queries)  # Print the SQL queries executed for the above operation
     
     
 
