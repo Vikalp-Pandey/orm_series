@@ -148,3 +148,22 @@ def run():
     first_sale = sales.first()
     print(first_sale)  # Print the first sale object
 
+# Fetching or Creating data with Model.objects.get_or_create()
+def run():
+    user=User.objects.first()
+    restaurant=Restaurant.objects.last()
+    # Fetching or creating(boolean)  a rating for the restaurant by the user
+    rating,created=Rating.objects.get_or_create(
+        restaurant=restaurant,
+        user=user,
+        rating=3
+    )
+    print(rating,created) # Print the rating object and whether it was created or fetched
+
+    if created:
+        # Provide Some Conditional Logic
+        print("Rating was created")
+    if rating:
+        # Provide Other Conditional Logic
+        print("Rating already exists")
+    print(connection.queries)
