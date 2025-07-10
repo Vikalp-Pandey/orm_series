@@ -12,30 +12,42 @@ def run():
 # 1) Creating a Record in Database by (Instatiating and Saving a model object)
 # We can use this same method to update as many parameters in a record.
 
-# def run():
-#     # M-1
-#     restaurant=Restaurant()
-#     restaurant.name="The Great Indian Restaurant"
-#     restaurant.website="https://www.thegreatindianrestaurant.com"
-#     restaurant.date_opened=timezone.now()
-#     restaurant.latitude=28.7041
-#     restaurant.longtitude=77.1025
-#     restaurant.restaurant_type=Restaurant.TypeChoices.INDIAN
-#     restaurant.save()  # Save the object to the database
+def run():
+    # M-1
+    restaurant=Restaurant()
+    restaurant.name="The Great Indian Restaurant"
+    restaurant.website="https://www.thegreatindianrestaurant.com"
+    restaurant.date_opened=timezone.now()
+    restaurant.latitude=28.7041
+    restaurant.longtitude=77.1025
+    restaurant.restaurant_type=Restaurant.TypeChoices.INDIAN
+    restaurant.save()  # Save the object to the database
 
 def run():    
     # M-2
     restaurant = Restaurant.objects.create(
-        name="The Great Chinese Restaurant",
-        website="https://www.thegreatchineserestaurant.com",
+        name="The Italian Bistro",
+        website="https://www.theitalianbistro.com",
         date_opened=timezone.now(),
-        latitude=28.7041,
+        latitude=28.5041,
         longtitude=77.1025,
-        restaurant_type=Restaurant.TypeChoices.CHINESE
+        restaurant_type=Restaurant.TypeChoices.ITALIAN
     )
     print(restaurant)  # Print the created restaurant object
+    print(restaurant.name)  # Print the created restaurant object's name
+
+
+# 2) Updating a Record in Database by (Instatiating and Saving a model object)
+
+    restaurant.latitude = 28.7041  # Update the latitude
+    restaurant.save()  # Save the updated object to the database
+    print(restaurant.latitude)  # Print the updated latitude
     print(connection.queries)  # Print the SQL queries executed for the above operation
 
+
+
+
+'''
 # Querying the Database with ORM
 def run():
     
@@ -78,3 +90,11 @@ def run():
     filtered_rating = Rating.objects.filter(rating__gte=3)  # Greater than or equal to 4.5
     filtered_rating = Rating.objects.filter(rating__lte=3)  # Lesser than or equal to 4.5
     print(filtered_rating)
+
+    # Excluding records based on a condition
+    excluded_rating = Rating.objects.exclude(rating=4)  # Exclude ratings
+
+    # Lookups
+    excluded_rating = Rating.objects.exclude(rating__lte=4)  # Exclude ratings
+    print(excluded_rating)
+    '''
