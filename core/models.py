@@ -23,8 +23,14 @@ class Restaurant(models.Model):
     name=models.CharField(max_length=100)
     website=models.URLField(default='')
     date_opened=models.DateField()
-    latitude=models.FloatField()
-    longtitude=models.FloatField()
+    latitude=models.FloatField(validators=[
+            MinValueValidator(-90),  # Minimum value for rating
+            MaxValueValidator(90)   # Maximum value for rating
+        ],)
+    longtitude=models.FloatField(validators=[
+            MinValueValidator(-180),  # Minimum value for rating
+            MaxValueValidator(180)   # Maximum value for rating
+        ],)
     restaurant_type=models.CharField(max_length=2, choices=TypeChoices.choices)
 
     def __str__(self):
