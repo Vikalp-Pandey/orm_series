@@ -167,3 +167,16 @@ def run():
         # Provide Other Conditional Logic
         print("Rating already exists")
     print(connection.queries)
+    
+def run():
+    user=User.objects.first()  # Fetching the first user
+    restaurant=Restaurant.objects.first()  # Fetching the first restaurant
+    
+    rating=Rating.objects.create(
+        user=user,
+        restaurant=restaurant,
+        rating=9
+    )    
+
+    rating.full_clean()  # This will raise a ValidationError if the rating is not valid
+    

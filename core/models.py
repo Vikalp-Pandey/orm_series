@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
+
+
 
 # Create your models here.
 '''Restaurant Management System'''
@@ -34,8 +37,17 @@ class Restaurant(models.Model):
 # 3) Rating  Model: Rating should be done by a User defined in users Table and on Rstaurant defined in Restaurant Table.
 class Rating(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
-    restaurant=models.ForeignKey(Restaurant,on_delete=models.CASCADE)
-    rating=models.PositiveSmallIntegerField()
+    restaurant=models.ForeignKey(Restaurant,on_delete=models.CASCADE,related_name='ratings') 
+    # related_name allows reverse access to ratings from Restaurant
+    # We can use ratings as a placeholder to access all ratings of a restaurant instead of using the default 'rating_set' method.
+    rating=models.PositiveSmallIntegerField(
+        validators=[
+            MinValueValidator(0),  # Minimum value for rating
+            MaxValueValidator(5)   # Maximum value for rating
+        ],
+        
+    )
+    # Rating should be between 0 and 5.So we use PositiveSmallIntegerField with validators.
 
     def __str__(self):
         return f"Rating : {self.rating}"
@@ -44,7 +56,7 @@ class Rating(models.Model):
 
 # 4) Sale Model
 class Sale(models.Model):
-    restaurant=models.ForeignKey(Restaurant,on_delete=models.SET_NULL,null=True)
+    restaurant=models.ForeignKey(Restaurant,on_delete=models.SET_NULL,null=True,related_name='sales')
     income=models.DecimalField(max_digits=8,decimal_places=2)
     datetime=models.DateTimeField()
     
