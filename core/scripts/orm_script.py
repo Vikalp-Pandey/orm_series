@@ -180,3 +180,8 @@ def run():
 
     rating.full_clean()  # This will raise a ValidationError if the rating is not valid
     
+def run():
+    print(Restaurant.objects.count())  # Count of all restaurants
+    print(Rating.objects.count())  # Count of all ratings
+    print(Sale.objects.count())  # Count of all sales 
+    print(connection.queries)  # Print the SQL queries executed for the above operation
