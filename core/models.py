@@ -27,7 +27,7 @@ class Restaurant(models.Model):
             MinValueValidator(-90),  # Minimum value for rating
             MaxValueValidator(90)   # Maximum value for rating
         ],)
-    longtitude=models.FloatField(validators=[
+    longitude=models.FloatField(validators=[
             MinValueValidator(-180),  # Minimum value for rating
             MaxValueValidator(180)   # Maximum value for rating
         ],)
